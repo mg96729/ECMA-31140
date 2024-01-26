@@ -26,10 +26,10 @@ k = k_s;
 c = c_s;
 end;
 
-resid;
+%resid;
 
 perfect_foresight_setup(periods = 200);
 perfect_foresight_solver;
 
-rplot k;
+%rplot k;
 

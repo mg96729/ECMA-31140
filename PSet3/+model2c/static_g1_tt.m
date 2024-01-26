@@ -13,10 +13,11 @@ function T = static_g1_tt(T, y, x, params)
 %   T         [#temp variables by 1]  double   vector of temporary terms
 %
 
-assert(length(T) >= 5);
+assert(length(T) >= 7);
 
 T = model2c.static_resid_tt(T, y, x, params);
 
-T(5) = getPowerDeriv(y(3),1-params(1),1);
+T(6) = getPowerDeriv(y(1),params(1),1);
+T(7) = getPowerDeriv(y(3),1-params(1),1);
 
 end

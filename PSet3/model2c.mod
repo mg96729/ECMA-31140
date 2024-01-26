@@ -9,14 +9,14 @@ delta = 0.025;
 l_s = 1/3;
 k_s = (l_s)*((1/alpha)*(1/beta-1+delta))^(1/(alpha-1));
 c_s = (k_s^alpha)*(l_s^(1-alpha))-delta*k_s;
-gamma = 1/c_s;
+gamma = (1/c_s)*(1-alpha)*k_s^alpha*l_s^-alpha;
 
 k_0 = 0.1*k_s;
 
 model;
 k + c = (l^(1-alpha))*(k(-1)^alpha) + (1-delta)*k(-1);
 1/c = beta*(1/(c(+1)))*(alpha*l(+1)^(1-alpha)*k^(alpha-1)+1-delta);
-1/c= gamma;
+gamma=(1/c)*(1-alpha)*(k(-1))^alpha*l^-alpha;
 end;
 
 initval;
@@ -31,9 +31,9 @@ end;
 
 %resid;
 
-perfect_foresight_setup(periods = 100);
+perfect_foresight_setup(periods = 200);
 perfect_foresight_solver;
 
-rplot k;
+%rplot k;
 
 

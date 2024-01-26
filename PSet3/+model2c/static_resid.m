@@ -25,8 +25,8 @@ residual(1) = lhs - rhs;
 lhs = 1/y(2);
 rhs = 1/y(2)*params(2)*T(4);
 residual(2) = lhs - rhs;
-lhs = 1/y(2);
-rhs = params(4);
+lhs = params(4);
+rhs = T(2)*(1-params(1))*1/y(2)*T(5);
 residual(3) = lhs - rhs;
 if ~isreal(residual)
   residual = real(residual)+imag(residual).^2;

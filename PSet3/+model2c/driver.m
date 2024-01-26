@@ -112,17 +112,17 @@ M_.nboth   = 0;
 M_.nsfwrd   = 2;
 M_.nspred   = 1;
 M_.ndynamic   = 3;
-M_.dynamic_tmp_nbr = [5; 0; 0; 0; ];
+M_.dynamic_tmp_nbr = [6; 1; 0; 0; ];
 M_.model_local_variables_dynamic_tt_idxs = {
 };
 M_.equations_tags = {
   1 , 'name' , '1' ;
   2 , 'name' , '2' ;
-  3 , 'name' , '3' ;
+  3 , 'name' , 'gamma' ;
 };
-M_.mapping.k.eqidx = [1 2 ];
+M_.mapping.k.eqidx = [1 2 3 ];
 M_.mapping.c.eqidx = [1 2 3 ];
-M_.mapping.l.eqidx = [1 2 ];
+M_.mapping.l.eqidx = [1 2 3 ];
 M_.static_and_dynamic_models_differ = false;
 M_.has_external_function = false;
 M_.state_var = [1 ];
@@ -137,8 +137,8 @@ M_.maximum_exo_lead = 0;
 oo_.exo_steady_state = zeros(0, 1);
 M_.params = NaN(8, 1);
 M_.endo_trends = struct('deflator', cell(3, 1), 'log_deflator', cell(3, 1), 'growth_factor', cell(3, 1), 'log_growth_factor', cell(3, 1));
-M_.NNZDerivatives = [9; -1; -1; ];
-M_.static_tmp_nbr = [4; 1; 0; 0; ];
+M_.NNZDerivatives = [11; -1; -1; ];
+M_.static_tmp_nbr = [5; 2; 0; 0; ];
 M_.model_local_variables_static_tt_idxs = {
 };
 M_.params(1) = 0.36;
@@ -153,7 +153,7 @@ M_.params(5) = M_.params(7)*(1/M_.params(1)*(1/M_.params(2)-1+M_.params(3)))^(1/
 k_s = M_.params(5);
 M_.params(6) = M_.params(5)^M_.params(1)*M_.params(7)^(1-M_.params(1))-M_.params(3)*M_.params(5);
 c_s = M_.params(6);
-M_.params(4) = 1/M_.params(6);
+M_.params(4) = M_.params(5)^M_.params(1)*(1-M_.params(1))*1/M_.params(6)*M_.params(7)^(-M_.params(1));
 gamma = M_.params(4);
 M_.params(8) = M_.params(5)*0.1;
 k_0 = M_.params(8);
@@ -176,11 +176,9 @@ ex0_ = oo_.exo_steady_state;
 oo_.steady_state(1) = M_.params(5);
 oo_.steady_state(2) = M_.params(6);
 oo_.steady_state(3) = M_.params(7);
-options_.periods = 100;
+options_.periods = 200;
 perfect_foresight_setup;
 perfect_foresight_solver;
-var_list_ = {'k'};
-rplot(var_list_);
 
 
 oo_.time = toc(tic0);

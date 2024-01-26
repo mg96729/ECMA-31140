@@ -23,7 +23,7 @@ if T_flag
     T = model2d.dynamic_g1_tt(T, y, x, params, steady_state, it_);
 end
 g1 = zeros(3, 6);
-g1(1,1)=(-(1-params(3)+T(1)*getPowerDeriv(y(1),params(1),1)));
+g1(1,1)=(-(1-params(3)+T(1)*T(7)));
 g1(1,2)=1;
 g1(1,3)=1;
 g1(1,4)=(-(T(2)*getPowerDeriv(y(4),1-params(1),1)));
@@ -31,6 +31,8 @@ g1(2,2)=(-(params(2)*1/y(5)*T(3)*getPowerDeriv(y(2),params(1)-1,1)));
 g1(2,3)=(-1)/(y(3)*y(3));
 g1(2,5)=(-(T(5)*params(2)*(-1)/(y(5)*y(5))));
 g1(2,6)=(-(params(2)*1/y(5)*T(4)*params(1)*getPowerDeriv(y(6),1-params(1),1)));
-g1(3,3)=(-1)/(y(3)*y(3));
+g1(3,1)=(-(T(6)*(1-params(1))*1/y(3)*T(7)));
+g1(3,3)=(-(T(6)*T(2)*(1-params(1))*(-1)/(y(3)*y(3))));
+g1(3,4)=(-(T(2)*(1-params(1))*1/y(3)*getPowerDeriv(y(4),(-params(1)),1)));
 
 end

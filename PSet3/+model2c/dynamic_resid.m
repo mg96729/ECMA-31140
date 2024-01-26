@@ -29,8 +29,8 @@ residual(1) = lhs - rhs;
 lhs = 1/y(3);
 rhs = params(2)*1/y(5)*T(5);
 residual(2) = lhs - rhs;
-lhs = 1/y(3);
-rhs = params(4);
+lhs = params(4);
+rhs = T(2)*(1-params(1))*1/y(3)*T(6);
 residual(3) = lhs - rhs;
 
 end

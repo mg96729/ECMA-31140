@@ -164,12 +164,9 @@ ys0_= oo_.steady_state;
 ex0_ = oo_.exo_steady_state;
 oo_.steady_state(1) = M_.params(5);
 oo_.steady_state(2) = M_.params(6);
-resid;
 options_.periods = 200;
 perfect_foresight_setup;
 perfect_foresight_solver;
-var_list_ = {'k'};
-rplot(var_list_);
 
 
 oo_.time = toc(tic0);

@@ -19,13 +19,15 @@ if T_flag
     T = model2c.static_g1_tt(T, y, x, params);
 end
 g1 = zeros(3, 3);
-g1(1,1)=1-(1-params(3)+T(1)*getPowerDeriv(y(1),params(1),1));
+g1(1,1)=1-(1-params(3)+T(1)*T(6));
 g1(1,2)=1;
-g1(1,3)=(-(T(2)*T(5)));
+g1(1,3)=(-(T(2)*T(7)));
 g1(2,1)=(-(1/y(2)*params(2)*params(1)*T(1)*getPowerDeriv(y(1),params(1)-1,1)));
 g1(2,2)=(-1)/(y(2)*y(2))-T(4)*params(2)*(-1)/(y(2)*y(2));
-g1(2,3)=(-(1/y(2)*params(2)*T(3)*params(1)*T(5)));
-g1(3,2)=(-1)/(y(2)*y(2));
+g1(2,3)=(-(1/y(2)*params(2)*T(3)*params(1)*T(7)));
+g1(3,1)=(-(T(5)*(1-params(1))*1/y(2)*T(6)));
+g1(3,2)=(-(T(5)*T(2)*(1-params(1))*(-1)/(y(2)*y(2))));
+g1(3,3)=(-(T(2)*(1-params(1))*1/y(2)*getPowerDeriv(y(3),(-params(1)),1)));
 if ~isreal(g1)
     g1 = real(g1)+2*imag(g1);
 end
