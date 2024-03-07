@@ -1,4 +1,4 @@
-function [C,K] = impulse_funcs(sig)
+function [c,k] = impulse_funcs(sig)
 
 beta = 0.98;
 sigma = sig;
@@ -8,8 +8,11 @@ z = 1;
 rho = 0.95;
 
 syms c k;
-
-u = (c^(1-sigma))/(1-sigma);
+if sigma == 1
+    u = log(c);
+else
+    u = (c^(1-sigma))/(1-sigma);
+end
 f = z*(k^alpha)+(1-delta)*k;
 
 %the derivatives we need
@@ -42,7 +45,7 @@ A = [1/beta -1;-u_c*f_kk/u_cc 1+beta*u_c*f_kk/u_cc];
 Ds = D(ind,ind);
 V = V(:,ind);
 
-V_l = inv(V)
+V_l = inv(V);
 
 B = [f_z; -beta*u_c*(f_kk*f_z+f_kz*rho)/u_cc];
 
@@ -57,3 +60,19 @@ b_2 = f_z+C(2,1)/((Ds(2,2)-rho)*V_l(2,2));
 syms k_t z_t
 C = a_1*k_t+a_2*z_t;
 K = b_1*k_t+b_2*z_t;
+
+%Now plot the time path for 100 period:
+T=100;
+%First, set the shocks and initial reaction in capital as 0:
+z = zeros(T,1);
+k = zeros(T,1);
+c = zeros(T,1);
+
+z(1) = 0.1;
+k(1) = k_s;
+
+%Then set the dynamic policy iteration:
+for t=1:T-1
+    c(t) = subs(C, {k_t z_t}, {k(t) z(t)});
+    k(t+1) = subs(K,{k_t z_t},{k(t) z(t)});
+end
