@@ -1,5 +1,5 @@
 % This File computes the policy functions and distributions Psi(m,theta_1) and Psi(m,theta_2), 
-% Using EGM.
+% Using VFI.
 
 clear all;
 close all;
@@ -81,7 +81,7 @@ figure(1);
 title('Q2 a')
 
 subplot(2,1,1);
-plot(mgrid,[gopt,mgrid],'-o');
+plot(mgrid,[gopt,mgrid]);
 grid;
 % xticks(mgrid);
 % xtickformat('%,.2f')
@@ -93,7 +93,7 @@ title('Policy Functions g(m, $\theta$), using EGM', 'Interpreter','latex');
 legend('$g(m,\theta_1)$','$g(m,\theta_2)$','Interpreter','latex', 'Location', 'Northwest','Fontsize',10);
 
 subplot(2,1,2);
-plot(mgrid,[copt,mgrid],'-o');
+plot(mgrid,[copt,mgrid]);
 grid;
 % xticks(mgrid);
 % xtickformat('%,.2f')
